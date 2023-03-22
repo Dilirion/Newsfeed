@@ -1,3 +1,7 @@
+.single-line-title-article {
+    cursor: pointer;
+}
+
 .single-line-title-article__image {
     margin-bottom: 18px;
     width: 100%;

@@ -4,6 +4,7 @@
     grid-template-columns: repeat(4, var(--grid-column-width));
     gap: var(--grid-gap);
     align-items: center;
+    cursor: pointer;
 }
 
 .related-small-article:last-child {

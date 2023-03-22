@@ -1,22 +1,34 @@
-import { categoryIds } from '../../utils.js';
-import { Navigation } from '../Navigation/Navigation.js';
-import { Articles } from '../Articles/Articles.js';
+import { categoryIds } from '../../utils';
+import { Navigation } from '../Navigation/Navigation';
+import { Articles } from '../Articles/Articles';
 import React from 'react';
 import './App.css';
+import {ArticleItem} from "../ArticleItem/ArticleItem";
+import {NewsApi} from "../../Types";
 
 export const App = () => {
+  const [articleId, setArticleId] = React.useState<number | null>(null);
   const [category, setCategory] = React.useState('index');
-  const [articles, setArticles] = React.useState({ items: [], categories: [], sources: [] });
+  const [articles, setArticles] = React.useState<NewsApi>({ items: [], categories: [], sources: [] });
 
-  const onNavClick = (e) => {
+  const onNavClick = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
-    setCategory(e.currentTarget.dataset.href);
+    setArticleId(null);
+    const category = e.currentTarget.dataset.href;
+    if (category) {
+      setCategory(category);
+    }
+  }
+
+  const onArticleClick = (id: number) => {
+    setArticleId(id);
   }
 
   React.useEffect(() => {
+    // @ts-ignore
     fetch('https://frontend.karpovcourses.net/api/v2/ru/news/' + categoryIds[category] || '')
       .then(response => response.json())
-      .then((response) => {
+      .then((response: NewsApi) => {
         setArticles(response);
       })
   }, [category])
@@ -35,7 +47,10 @@ export const App = () => {
       </header>
 
       <main>
-        <Articles articles={articles} />
+        {articleId !== null
+          ? <ArticleItem id={articleId} categories={articles.categories} sources={articles.sources} onArticleClick={onArticleClick} />
+          : <Articles articles={articles} onArticleClick={onArticleClick} />
+        }
       </main>
 
       <footer className="footer">

@@ -1,11 +1,16 @@
-import React from 'react';
-import { categoryNames } from '../../utils.js';
+import React, { FC } from 'react';
+import { categoryNames } from '../../utils';
 import './Navigation.css';
 import logo from '../../images/logo.svg';
 
-console.log('hello');
+interface Props {
+  onNavClick: (event: React.MouseEvent<HTMLElement>) => void;
+  currentCategory: string;
+  className?: string;
+  placement: 'header' | 'footer';
+}
 
-export const Navigation = ({ onNavClick, currentCategory, className = '', placement = 'header' }) => {
+export const Navigation: FC<Props> = ({ onNavClick, currentCategory, className = '', placement = 'header' }) => {
   return (
     <nav className={`grid navigation navigation--${placement} ${className}`}>
       <a className="navigation__logo" data-href="index" href="#">
@@ -21,6 +26,7 @@ export const Navigation = ({ onNavClick, currentCategory, className = '', placem
                 data-href={item}
                 href="#"
               >
+                {/* @ts-ignore */}
                 {categoryNames[item]}
               </a>
             </li>
