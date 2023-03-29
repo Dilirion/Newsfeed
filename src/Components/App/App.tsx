@@ -3,8 +3,8 @@ import { Navigation } from '../Navigation/Navigation';
 import { Articles } from '../Articles/Articles';
 import React from 'react';
 import './App.css';
-import {ArticleItem} from "../ArticleItem/ArticleItem";
-import {NewsApi} from "../../Types";
+import { ArticleItem } from '../ArticleItem/ArticleItem';
+import { NewsApi } from '../../Types';
 
 export const App = () => {
   const [articleId, setArticleId] = React.useState<number | null>(null);
@@ -18,20 +18,19 @@ export const App = () => {
     if (category) {
       setCategory(category);
     }
-  }
+  };
 
   const onArticleClick = (id: number) => {
     setArticleId(id);
-  }
+  };
 
   React.useEffect(() => {
-    // @ts-ignore
     fetch('https://frontend.karpovcourses.net/api/v2/ru/news/' + categoryIds[category] || '')
-      .then(response => response.json())
+      .then((response) => response.json())
       .then((response: NewsApi) => {
         setArticles(response);
-      })
-  }, [category])
+      });
+  }, [category]);
 
   return (
     <React.Fragment>
@@ -47,10 +46,16 @@ export const App = () => {
       </header>
 
       <main>
-        {articleId !== null
-          ? <ArticleItem id={articleId} categories={articles.categories} sources={articles.sources} onArticleClick={onArticleClick} />
-          : <Articles articles={articles} onArticleClick={onArticleClick} />
-        }
+        {articleId !== null ? (
+          <ArticleItem
+            id={articleId}
+            categories={articles.categories}
+            sources={articles.sources}
+            onArticleClick={onArticleClick}
+          />
+        ) : (
+          <Articles articles={articles} onArticleClick={onArticleClick} />
+        )}
       </main>
 
       <footer className="footer">
@@ -62,11 +67,16 @@ export const App = () => {
             className="footer__navigation"
           />
           <div className="footer__bottom">
-            <p className="footer__text">Сделано на Frontend курсе в <a className="footer__link" href="https://karpov.courses/frontend" target="_blank">Karpov.Courses</a></p>
+            <p className="footer__text">
+              Сделано на Frontend курсе в{' '}
+              <a rel="noreferrer" className="footer__link" href="https://karpov.courses/frontend" target="_blank">
+                Karpov.Courses
+              </a>
+            </p>
             <p className="footer__text footer__text--gray">© 2021</p>
           </div>
         </div>
       </footer>
     </React.Fragment>
-  )
-}
+  );
+};

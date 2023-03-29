@@ -1,9 +1,9 @@
-import React, { FC } from "react";
+import React, { FC } from 'react';
 import './ArticleItem.css';
-import { RelatedSmallArticle } from "../RelatedSmallArticle/RelatedSmallArticle";
-import { SingleLineTitleArticle } from "../SingleLineTitleArticle/SingleLineTitleArticle";
-import {Article, ArticleItemAPI, Category, NewsApi, RelatedArticlesAPI, Source} from "../../Types";
-import {beautifyDate, categoryIds} from "../../utils";
+import { RelatedSmallArticle } from '../RelatedSmallArticle/RelatedSmallArticle';
+import { SingleLineTitleArticle } from '../SingleLineTitleArticle/SingleLineTitleArticle';
+import { Article, ArticleItemAPI, Category, RelatedArticlesAPI, Source } from '../../Types';
+import { beautifyDate } from '../../utils';
 
 interface Props {
   id: number;
@@ -18,11 +18,11 @@ export const ArticleItem: FC<Props> = ({ id, categories, sources, onArticleClick
 
   React.useEffect(() => {
     fetch(`https://frontend.karpovcourses.net/api/v2/news/full/${id}`)
-      .then(response => response.json())
+      .then((response) => response.json())
       .then(setArticleItem);
 
     fetch(` https://frontend.karpovcourses.net/api/v2/news/related/${id}?count=9`)
-      .then(response => response.json())
+      .then((response) => response.json())
       .then((response: RelatedArticlesAPI) => {
         setRelatedArticles(response.items);
       });
@@ -50,7 +50,6 @@ export const ArticleItem: FC<Props> = ({ id, categories, sources, onArticleClick
           </section>
         ) : null}
 
-
         <div className="grid container article__main">
           <div className="article__content">
             {!articleItem.image.length && (
@@ -69,8 +68,8 @@ export const ArticleItem: FC<Props> = ({ id, categories, sources, onArticleClick
 
           <div className="article__small-column">
             {relatedArticles.slice(3, 9).map((item) => {
-              const category = categories.find(({id}) => item.category_id === id);
-              const source = sources.find(({id}) => item.source_id === id);
+              const category = categories.find(({ id }) => item.category_id === id);
+              const source = sources.find(({ id }) => item.source_id === id);
 
               return (
                 <RelatedSmallArticle
@@ -81,7 +80,7 @@ export const ArticleItem: FC<Props> = ({ id, categories, sources, onArticleClick
                   image={item.image}
                   onClick={() => onArticleClick(item.id)}
                 />
-              )
+              );
             })}
           </div>
         </div>
@@ -93,8 +92,8 @@ export const ArticleItem: FC<Props> = ({ id, categories, sources, onArticleClick
 
           <div className="grid article-page__related-articles-list">
             {relatedArticles.slice(0, 3).map((item: Article) => {
-              const category = categories.find(({id}) => item.category_id === id);
-              const source = sources.find(({id}) => item.source_id === id);
+              const category = categories.find(({ id }) => item.category_id === id);
+              const source = sources.find(({ id }) => item.source_id === id);
 
               return (
                 <SingleLineTitleArticle
@@ -106,7 +105,7 @@ export const ArticleItem: FC<Props> = ({ id, categories, sources, onArticleClick
                   source={source?.name || ''}
                   onClick={() => onArticleClick(item.id)}
                 />
-              )
+              );
             })}
           </div>
         </div>

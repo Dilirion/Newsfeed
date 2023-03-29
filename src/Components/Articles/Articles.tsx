@@ -2,11 +2,11 @@ import React, { FC } from 'react';
 import { MainArticle } from '../MainArticle/MainArticle';
 import { SmallArticle } from '../SmallArticle/SmallArticle';
 import './Articles.css';
-import {NewsApi} from "../../Types";
+import { NewsApi } from '../../Types';
 
 interface Props {
-    articles: NewsApi;
-    onArticleClick: (id: number) => void;
+  articles: NewsApi;
+  onArticleClick: (id: number) => void;
 }
 
 export const Articles: FC<Props> = ({ articles, onArticleClick }) => {
@@ -15,8 +15,8 @@ export const Articles: FC<Props> = ({ articles, onArticleClick }) => {
       <div className="container grid">
         <section className="articles__big-column">
           {articles.items.slice(0, 3).map((item) => {
-            const category = articles.categories.find(({id}) => item.category_id === id);
-            const source = articles.sources.find(({id}) => item.source_id === id);
+            const category = articles.categories.find(({ id }) => item.category_id === id);
+            const source = articles.sources.find(({ id }) => item.source_id === id);
 
             return (
               <MainArticle
@@ -28,12 +28,12 @@ export const Articles: FC<Props> = ({ articles, onArticleClick }) => {
                 source={source?.name || ''}
                 onClick={() => onArticleClick(item.id)}
               />
-            )
+            );
           })}
         </section>
         <section className="articles__small-column">
           {articles.items.slice(3, 12).map((item) => {
-            const source = articles.sources.find(({id}) => item.source_id === id);
+            const source = articles.sources.find(({ id }) => item.source_id === id);
             return (
               <SmallArticle
                 key={item.title}
@@ -42,10 +42,10 @@ export const Articles: FC<Props> = ({ articles, onArticleClick }) => {
                 date={item.date}
                 onClick={() => onArticleClick(item.id)}
               />
-            )
+            );
           })}
         </section>
       </div>
     </section>
-  )
-}
+  );
+};

@@ -22,17 +22,16 @@ export const Navigation: FC<Props> = ({ onNavClick, currentCategory, className =
             <li className="navigation__item" key={item}>
               <a
                 onClick={onNavClick}
-                className={`navigation__link ${currentCategory === item ? 'navigation__link--active' : '' }`}
+                className={`navigation__link ${currentCategory === item ? 'navigation__link--active' : ''}`}
                 data-href={item}
                 href="#"
               >
-                {/* @ts-ignore */}
                 {categoryNames[item]}
               </a>
             </li>
-          )
+          );
         })}
       </ul>
     </nav>
-  )
-}
+  );
+};
