@@ -30,11 +30,7 @@ export const Navigation: FC<Props> = ({ className = '', placement = 'header' }) 
                     return true;
                   }
 
-                  if (item === 'index' && location.pathname === '/') {
-                    return true;
-                  }
-
-                  return false;
+                  return item === 'index' && location.pathname === '/';
                 }}
               >
                 {categoryNames[item]}
