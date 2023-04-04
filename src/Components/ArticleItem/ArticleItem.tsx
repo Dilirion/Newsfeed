@@ -5,6 +5,7 @@ import { SingleLineTitleArticle } from '../SingleLineTitleArticle/SingleLineTitl
 import { Article, ArticleItemAPI, Category, RelatedArticlesAPI, Source } from '../../Types';
 import { beautifyDate } from '../../utils';
 import { useParams } from 'react-router-dom';
+import { ArticleItemInfo } from '../ArticleItemInfo/ArticleItemInfo';
 
 export const ArticleItem: FC = () => {
   const { id }: { id: string } = useParams();
@@ -37,6 +38,18 @@ export const ArticleItem: FC = () => {
     return null;
   }
 
+  const renderArticleItemInfo = (articleItem: ArticleItemAPI): React.ReactElement => {
+    return (
+      <ArticleItemInfo
+        categoryName={articleItem.category.name}
+        date={beautifyDate(articleItem.date)}
+        sourceLink={articleItem.link}
+        sourceName={articleItem.source?.name}
+        author={articleItem.author}
+      />
+    );
+  };
+
   return (
     <section className="article-page">
       <article className="article">
@@ -47,10 +60,7 @@ export const ArticleItem: FC = () => {
                 <h1 className="article__hero-title">{articleItem.title}</h1>
               </div>
 
-              <div className="grid">
-                <span className="article-category article__category">{articleItem.category.name}</span>
-                <span className="article-date article__date">{beautifyDate(articleItem.date)}</span>
-              </div>
+              {renderArticleItemInfo(articleItem)}
             </div>
           </section>
         ) : null}
@@ -61,10 +71,7 @@ export const ArticleItem: FC = () => {
               <div className="article__title-container">
                 <h1 className="article__title">{articleItem.title}</h1>
 
-                <div className="grid">
-                  <span className="article-category article__category">{articleItem.category.name}</span>
-                  <span className="article-date article__date">{beautifyDate(articleItem.date)}</span>
-                </div>
+                {renderArticleItemInfo(articleItem)}
               </div>
             )}
 

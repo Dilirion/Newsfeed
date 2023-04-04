@@ -15,6 +15,7 @@ export interface ArticleItemAPI {
   text: string;
   category: Category;
   source: Source;
+  author?: string;
 }
 
 export interface RelatedArticlesAPI {
