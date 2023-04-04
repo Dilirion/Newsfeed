@@ -22,6 +22,9 @@ build:
     - npm ci
   script:
     - npm run build
+  artifacts:
+    paths:
+      - dist
   only:
     - merge_requests
     - master
