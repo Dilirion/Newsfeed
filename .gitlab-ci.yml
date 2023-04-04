@@ -16,7 +16,7 @@ code_quality:
     - merge_requests
 
 build:
-  image: node:14.17.4
+  image: node:16.16.0
   stage: build
   before_script:
     - npm ci
