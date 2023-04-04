@@ -4,7 +4,7 @@ stages:
   - deploy
 
 code_quality:
-  image: node:14.17.4
+  image: node:16.16.0
   stage: test
   before_script:
     - npm ci
