@@ -40,7 +40,7 @@ deploy:
     - chmod 600 ~/.ssh/id_rsa
     - echo "$SSH_KNOWN_HOSTS" >> ~/.ssh/known_hosts
     - chmod 600 ~/.ssh/known_hosts
-  environments:
+  environment:
     name: production
   resource_group: production
   script:
