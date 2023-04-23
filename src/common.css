@@ -10,7 +10,7 @@
   --grid-gap: 20px;
 }
 
-* {
+*:not(svg *) {
   all: unset;
   display: revert;
 }
