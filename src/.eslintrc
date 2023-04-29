@@ -1,14 +1,14 @@
 {
   "extends": ["plugin:@typescript-eslint/recommended", "plugin:react/recommended", "prettier"],
   "parser": "@typescript-eslint/parser",
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
-    }
-  },
-  "settings": {
-    "react": {
-      "versiom": "detect"
     }
   },
   "env": {
@@ -16,7 +16,6 @@
     "browser": true
   },
   "rules": {
-    "@typescript-eslint/no-explicit-any": "off",
-    "no-console": "off"
+    "@typescript-eslint/no-explicit-any": "off"
   }
 }

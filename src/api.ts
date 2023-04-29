@@ -1,4 +1,5 @@
-import { initializeApp } from 'firebase/app';
+import { initializeApp, FirebaseApp } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
 import {
   collection,
   getDocs,
@@ -15,8 +16,8 @@ import {
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { IPartnerArticle } from './Types';
 
-export const initializeAPI = () => {
-  initializeApp({
+export const initializeAPI = (): FirebaseApp => {
+  const firebaseApp = initializeApp({
     apiKey: 'AIzaSyDbnbrtLn7gyZU11tSpjvdN6F81aNJuYnQ',
     authDomain: 'krom-karpov-news.firebaseapp.com',
     projectId: 'krom-karpov-news',
@@ -25,8 +26,11 @@ export const initializeAPI = () => {
     appId: '1:862108373621:web:ba9132dc3128ff6a62de3c',
   });
 
-  getFirestore();
-  getStorage();
+  getAuth(firebaseApp);
+  getFirestore(firebaseApp);
+  getStorage(firebaseApp);
+
+  return firebaseApp;
 };
 
 const partnersPostsCollection = 'partners-posts';
