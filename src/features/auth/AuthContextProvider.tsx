@@ -1,15 +1,41 @@
 import React, { createContext, FC, useContext, useEffect, useState } from 'react';
-import { TAuthContext } from './types';
+import { TAuthContext, TLoginWithEmailAndPasswordResult } from './types';
 import { FirebaseApp } from 'firebase/app';
-import { getAuth, User, signInWithEmailAndPassword, browserLocalPersistence } from 'firebase/auth';
+import {
+  getAuth,
+  User,
+  signInWithEmailAndPassword,
+  browserLocalPersistence,
+  signOut,
+  signInWithPopup,
+  ProviderId,
+  GoogleAuthProvider,
+  GithubAuthProvider,
+  UserCredential,
+} from 'firebase/auth';
+import { doc, getDoc, getFirestore } from 'firebase/firestore';
 
 const authContext = createContext<TAuthContext>({
   isAuthenticate: null,
   user: null,
   loginWithEmailAndPassword: () => Promise.reject({}),
+  loginWithPopup: () => Promise.reject({}),
+  logOut: () => void 0,
 });
 
-export const useAuth = (): TAuthContext => useContext(authContext);
+export const ALLOWED_OAUTH_PROVIDERS: Record<string, any> = {
+  [ProviderId.GOOGLE]: new GoogleAuthProvider(),
+  [ProviderId.GITHUB]: new GithubAuthProvider(),
+};
+
+export const useAuthContext = (): TAuthContext => {
+  return useContext<TAuthContext>(authContext);
+};
+
+const isUserAdmin = async (firebaseApp: FirebaseApp) => {
+  const db = getFirestore(firebaseApp);
+  return await getDoc(doc(db, '/internal/auth'));
+};
 
 type TProps = {
   firebaseApp: FirebaseApp;
@@ -20,8 +46,40 @@ export const AuthContextProvider: FC<TProps> = ({ firebaseApp, children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [auth] = useState(getAuth(firebaseApp));
 
-  const loginWithEmailAndPassword = (email: string, password: string) =>
-    signInWithEmailAndPassword(auth, email, password)
+  const loginWithEmailAndPassword = (email: string, password: string) => {
+    return processLogin(signInWithEmailAndPassword(auth, email, password));
+  };
+
+  const loginWithPopup = (provider: string) => {
+    return processLogin(signInWithPopup(auth, ALLOWED_OAUTH_PROVIDERS[provider]));
+  };
+
+  useEffect(() => {
+    auth.setPersistence(browserLocalPersistence);
+
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        isUserAdmin(firebaseApp)
+          .then(() => {
+            setIsAuthenticate(true);
+            setUser(user);
+          })
+          .catch(() => {
+            logOut();
+            setIsAuthenticate(false);
+            setUser(null);
+          });
+      } else {
+        setIsAuthenticate(false);
+        setUser(null);
+      }
+    });
+  }, [auth]);
+
+  const processLogin = (loginPromise: Promise<UserCredential>): Promise<TLoginWithEmailAndPasswordResult> => {
+    setIsAuthenticate(null);
+    setUser(null);
+    return loginPromise
       .then((result) => {
         // todo log data
         return result;
@@ -30,21 +88,12 @@ export const AuthContextProvider: FC<TProps> = ({ firebaseApp, children }) => {
         console.error('login error', error);
         throw error;
       });
+  };
 
-  useEffect(() => {
-    auth.setPersistence(browserLocalPersistence);
-
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        setIsAuthenticate(true);
-        setUser(user);
-      } else {
-        setIsAuthenticate(false);
-        setUser(null);
-      }
-    });
-  }, [auth]);
+  const logOut = () => signOut(auth);
   return (
-    <authContext.Provider value={{ isAuthenticate, user, loginWithEmailAndPassword }}>{children}</authContext.Provider>
+    <authContext.Provider value={{ isAuthenticate, user, loginWithEmailAndPassword, logOut, loginWithPopup }}>
+      {children}
+    </authContext.Provider>
   );
 };

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Redirect, Route, RouteProps } from 'react-router-dom';
-import { useAuth } from '../../features/auth/AuthContextProvider';
+import { useAuthContext } from '../../features/auth/AuthContextProvider';
 import { Box, CircularProgress } from '@mui/material';
 
 type Tprops = {
@@ -8,7 +8,7 @@ type Tprops = {
 } & RouteProps;
 
 export const PrivateRoute: FC<Tprops> = ({ children, ...rest }) => {
-  const { isAuthenticate } = useAuth();
+  const { isAuthenticate } = useAuthContext();
   if (isAuthenticate === null) {
     return (
       <Box sx={{ p: 2, textAlign: 'center' }}>

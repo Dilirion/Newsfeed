@@ -18,6 +18,7 @@ export const AdminArticles: FC = () => {
       const articles = await getPartnersArticles();
 
       setArticles(articles);
+      console.log(articles);
     })();
   }, []);
 
