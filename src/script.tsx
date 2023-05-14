@@ -13,7 +13,6 @@ ReactDOM.render(
     <Router>
       <App />
     </Router>
-    ,
   </AuthContextProvider>,
   document.getElementById('root')
 );

@@ -1,4 +1,4 @@
-export interface NewsApi {
+export interface NewsAPI {
   sources: Source[];
   categories: Category[];
   items: Article[];
@@ -25,11 +25,14 @@ export interface RelatedArticlesAPI {
 export interface Source {
   id: number;
   name: string;
+  site?: string;
 }
+
+export type CategoryNames = 'politics' | 'sport' | 'tech' | 'karpov.courses' | 'fashion' | 'other';
 
 export interface Category {
   id: number;
-  name: string;
+  name: CategoryNames;
 }
 
 export interface Article {

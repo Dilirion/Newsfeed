@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react';
 import { Switch, Route, useLocation } from 'react-router-dom';
-import { Articles } from '../Articles/Articles';
-import { ArticleItem } from '../ArticleItem/ArticleItem';
+import { ArticlePage } from '../ArticlePage/ArticlePage';
 import { Page } from '../Page/Page';
 import { AdminPage } from '../AdminPage/AdminPage';
 import { AdminArticles } from '../AdminAricles/AdminArticles';
 import { AdminArticleItem } from '../AdminArticleItem/AdminArticleItem';
 import { PrivateRoute } from '../PrivateRoute/PrivateRoute';
 import { LoginContainer } from '../../features/auth/login/LoginContainer';
+import { CategoryPage } from '@components/CategoryPage/CategoryPage';
+import { HomePage } from '@components/HomePage/HomePage';
 
 export const App = () => {
   const { pathname } = useLocation();
@@ -40,17 +41,17 @@ export const App = () => {
       </PrivateRoute>
       <Route path={'/article/:id'}>
         <Page>
-          <ArticleItem />
+          <ArticlePage />
         </Page>
       </Route>
-      <Route path={'/:categoryId'}>
+      <Route path={'/:category'}>
         <Page>
-          <Articles />
+          <CategoryPage />
         </Page>
       </Route>
       <Route path={'/'}>
         <Page>
-          <Articles />
+          <HomePage />
         </Page>
       </Route>
     </Switch>

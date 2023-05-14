@@ -14,7 +14,7 @@ import {
   limit,
 } from 'firebase/firestore';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { IPartnerArticle } from './Types';
+import { IPartnerArticle } from './types';
 
 export const initializeAPI = (): FirebaseApp => {
   const firebaseApp = initializeApp({

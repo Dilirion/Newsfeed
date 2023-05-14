@@ -85,7 +85,7 @@ export const AuthContextProvider: FC<TProps> = ({ firebaseApp, children }) => {
         return result;
       })
       .catch((error) => {
-        console.error('login error', error);
+        //console.error('login error', error);
         throw error;
       });
   };

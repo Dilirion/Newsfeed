@@ -8,7 +8,7 @@ import CardMedia from '@mui/material/CardMedia';
 import { CardActionArea } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
-import { IPartnerArticle } from '../../Types';
+import { IPartnerArticle } from '../../types';
 import { getPartnersArticles } from '../../api';
 
 export const AdminArticles: FC = () => {
@@ -18,7 +18,6 @@ export const AdminArticles: FC = () => {
       const articles = await getPartnersArticles();
 
       setArticles(articles);
-      console.log(articles);
     })();
   }, []);
 
