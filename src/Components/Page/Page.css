@@ -9,6 +9,10 @@
   margin-left: 24px;
 }
 
+.header__controls {
+  margin-left: auto;
+}
+
 .header--article-page {
   padding-bottom: 100px;
 }
@@ -17,8 +21,8 @@
   margin-top: 64px;
   padding-top: 24px;
   padding-bottom: 80px;
-  background-color: var(--color-primary);
-  color: var(--color-white);
+  background-color: var(--constant-black);
+  color: var(--constant-white);
 }
 
 .footer__top {
@@ -35,7 +39,7 @@
 }
 
 .footer__link {
-  color: var(--color-accent);
+  color: var(--constant-accent);
   text-decoration: underline;
   cursor: pointer;
 }

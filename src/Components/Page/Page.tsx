@@ -2,6 +2,7 @@ import React, { FC, Fragment } from 'react';
 import './Page.css';
 import { Navigation } from '../Navigation/Navigation';
 import { Logo } from '@components/Logo/Logo';
+import { ColorSchemeSwitcher } from '@components/ColorSchemeSwitcher/ColorSchemeSwitcher';
 
 interface Props {
   children?: React.ReactNode;
@@ -14,6 +15,9 @@ export const Page: FC<Props> = ({ children }) => {
         <div className="container header__container">
           <Logo />
           <Navigation className="header__navigation" />
+          <div className="header__controls">
+            <ColorSchemeSwitcher />
+          </div>
         </div>
       </header>
 
