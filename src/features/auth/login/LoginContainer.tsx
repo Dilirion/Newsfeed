@@ -1,5 +1,7 @@
 import React, { FC, Reducer, useReducer, useState } from 'react';
-import { LoginForm, TLoginField } from '@components/LoginForm/LoginForm';
+import { useHistory, useLocation } from 'react-router-dom';
+import { ProviderId } from 'firebase/auth';
+import { LoginForm, TLoginField } from '../components/LoginForm/LoginForm';
 import './LoginContainer.css';
 import { validateEmail } from './utils';
 import { ALLOWED_OAUTH_PROVIDERS, useAuthContext } from '../AuthContextProvider';
@@ -7,8 +9,6 @@ import { Link, Typography } from '@mui/material';
 import GoogleIcon from '@mui/icons-material/Google';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LoginIcon from '@mui/icons-material/Login';
-import { useHistory, useLocation } from 'react-router-dom';
-import { ProviderId } from 'firebase/auth';
 import { TLoginWithEmailAndPasswordResult } from '../types';
 
 type TLoginFieldState = Omit<TLoginField, 'onChange'>;

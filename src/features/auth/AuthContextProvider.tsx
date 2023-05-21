@@ -1,6 +1,4 @@
 import React, { createContext, FC, useContext, useEffect, useState } from 'react';
-import { TAuthContext, TLoginWithEmailAndPasswordResult } from './types';
-import { FirebaseApp } from 'firebase/app';
 import {
   getAuth,
   User,
@@ -14,6 +12,8 @@ import {
   UserCredential,
 } from 'firebase/auth';
 import { doc, getDoc, getFirestore } from 'firebase/firestore';
+import { FirebaseApp } from 'firebase/app';
+import { TAuthContext } from './types';
 
 const authContext = createContext<TAuthContext>({
   isAuthenticate: null,
@@ -76,7 +76,7 @@ export const AuthContextProvider: FC<TProps> = ({ firebaseApp, children }) => {
     });
   }, [auth]);
 
-  const processLogin = (loginPromise: Promise<UserCredential>): Promise<TLoginWithEmailAndPasswordResult> => {
+  const processLogin = (loginPromise: Promise<UserCredential>) => {
     setIsAuthenticate(null);
     setUser(null);
     return loginPromise
