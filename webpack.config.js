@@ -30,7 +30,7 @@ module.exports = {
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
-        test: /\.svg$/,
+        test: /\.(svg|jpg)$/,
         type: 'asset/resource',
       },
       {
@@ -46,6 +46,7 @@ module.exports = {
       '@components': path.resolve('./src/components'),
       '@features': path.resolve('./src/features'),
       '@app': path.resolve('./src/app'),
+      '@images': path.resolve('./src/images'),
     },
   },
   optimization: {

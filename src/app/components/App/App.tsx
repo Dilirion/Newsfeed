@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Switch, Route, useLocation } from 'react-router-dom';
 import { Page } from '@components/Page/Page';
 import { HomePage } from '@features/articlesList/components/HomePage/HomePage';
@@ -12,9 +12,13 @@ import { LoginContainer } from '@features/auth/login/LoginContainer';
 
 export const App = () => {
   const { pathname } = useLocation();
+  const prevPathName = useRef(pathname);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    if (pathname !== prevPathName.current) {
+      prevPathName.current = pathname;
+      window.scrollTo(0, 0);
+    }
   }, [pathname]);
 
   return (

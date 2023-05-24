@@ -2,7 +2,6 @@
   display: flex;
   border-left: 4px solid var(--foreground-primary);
   padding-left: 12px;
-  cursor: pointer;
 }
 
 .article-card:hover {
@@ -13,16 +12,15 @@
 .article-card__image {
   width: 152px;
   height: 112px;
-  object-fit: cover;
-  display: block;
   margin-right: 12px;
   flex-shrink: 0;
-  overflow: hidden;
 }
 
 .article-card__content {
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
+  max-width: 100%;
 }
 
 .article-card__title {
@@ -64,4 +62,13 @@
 
 .article-card__date:not(:last-child)::after {
   content: "\00a0·\00a0";
+}
+
+/**
+* Skeleton
+ */
+
+.article-card--skeleton,
+.article-card--skeleton:hover {
+  border-color: var(--skeleton-color);
 }
