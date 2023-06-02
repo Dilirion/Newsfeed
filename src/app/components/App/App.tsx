@@ -11,7 +11,8 @@ import { PrivateRoute } from '@features/auth/components/PrivateRoute/PrivateRout
 import { LoginContainer } from '@features/auth/login/LoginContainer';
 
 export const App = () => {
-  const { pathname } = useLocation();
+  const location = useLocation();
+  const { pathname } = location;
   const prevPathName = useRef(pathname);
 
   useEffect(() => {
@@ -22,42 +23,44 @@ export const App = () => {
   }, [pathname]);
 
   return (
-    <Switch>
-      <Route path={'/login'} exact>
-        <Page>
-          <LoginContainer />
-        </Page>
-      </Route>
-      <PrivateRoute path={'/admin'} exact>
-        <AdminPage>
-          <AdminArticles />
-        </AdminPage>
-      </PrivateRoute>
-      <PrivateRoute path={'/admin/create'}>
-        <AdminPage>
-          <AdminArticleItem />
-        </AdminPage>
-      </PrivateRoute>
-      <PrivateRoute path={'/admin/edit/:id'}>
-        <AdminPage>
-          <AdminArticleItem />
-        </AdminPage>
-      </PrivateRoute>
-      <Route path={'/article/:id'}>
-        <Page>
-          <ArticlePage />
-        </Page>
-      </Route>
-      <Route path={'/:category'}>
-        <Page>
-          <CategoryPage />
-        </Page>
-      </Route>
-      <Route path={'/'}>
-        <Page>
-          <HomePage />
-        </Page>
-      </Route>
-    </Switch>
+    <div>
+      <Switch location={location}>
+        <Route path={'/login'} exact>
+          <Page>
+            <LoginContainer />
+          </Page>
+        </Route>
+        <PrivateRoute path={'/admin'} exact>
+          <AdminPage>
+            <AdminArticles />
+          </AdminPage>
+        </PrivateRoute>
+        <PrivateRoute path={'/admin/create'}>
+          <AdminPage>
+            <AdminArticleItem />
+          </AdminPage>
+        </PrivateRoute>
+        <PrivateRoute path={'/admin/edit/:id'}>
+          <AdminPage>
+            <AdminArticleItem />
+          </AdminPage>
+        </PrivateRoute>
+        <Route path={'/article/:id'}>
+          <Page>
+            <ArticlePage />
+          </Page>
+        </Route>
+        <Route path={'/:category'}>
+          <Page>
+            <CategoryPage />
+          </Page>
+        </Route>
+        <Route path={'/'}>
+          <Page>
+            <HomePage />
+          </Page>
+        </Route>
+      </Switch>
+    </div>
   );
 };

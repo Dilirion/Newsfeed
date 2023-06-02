@@ -5,12 +5,15 @@ import { Category } from '@features/categories/types';
 import { getSources } from '@features/sources/selectors';
 import { Source } from '@features/sources/types';
 
-export const getArticleItem = (state: RootState): ArticleItemAPI | null => state.articleItem.item;
+export const getArticleItem =
+  (id: number) =>
+  (state: RootState): ArticleItemAPI | null =>
+    state.articleItem.items[id];
 
 export const getCachedArticleItem =
   (id: number) =>
   (state: RootState): ArticleItemAPI | null => {
-    const articleItem = getArticleItem(state);
+    const articleItem = getArticleItem(id)(state);
 
     if (articleItem) {
       return articleItem;
