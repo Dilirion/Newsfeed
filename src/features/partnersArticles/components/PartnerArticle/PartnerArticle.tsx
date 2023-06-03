@@ -19,7 +19,7 @@ export const PartnerArticle = () => {
 
   return (
     <section className="partner-article">
-      <div className="container grid">
+      <div className="partner-article__container container grid">
         <div className="partner-article__image-container">
           <img src={article.image} alt={article.title} className="partner-article__image" />
         </div>
