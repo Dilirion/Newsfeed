@@ -14,7 +14,7 @@ import { getRelatedArticles } from '@features/relatedNews/selectors';
 import { getSources } from '@features/sources/selectors';
 import { fetchArticleItem } from '@features/articleItem/actions';
 import { fetchRelatedArticles } from '@features/relatedNews/actions';
-import { store } from '@app/store';
+import { Dispatch } from '@app/store';
 import { HeroSkeleton } from '@components/Hero/HeroSkeleton';
 import { SkeletonText } from '@components/SkeletonText/SkeletonText';
 import { SidebarArticleCardSkeleton } from '@components/SidebarArticleCard/SidebarArticleCardSkeleton';
@@ -22,7 +22,7 @@ import { useAdaptive } from '@app/hooks';
 
 export const ArticlePage: FC = () => {
   const { id }: { id: string } = useParams();
-  const dispatch = useDispatch<typeof store.dispatch>();
+  const dispatch = useDispatch<Dispatch>();
   const articleItem = useSelector(getCachedArticleItem(Number(id)));
   const relatedArticles = useSelector(getRelatedArticles(Number(id)));
   const sources = useSelector(getSources);
@@ -32,7 +32,10 @@ export const ArticlePage: FC = () => {
   React.useLayoutEffect(() => {
     if (!articleItem?.text) {
       setLoading(true);
-      Promise.all([dispatch(fetchArticleItem(Number(id))), dispatch(fetchRelatedArticles(Number(id)))]).then(() => {
+      Promise.all([
+        dispatch(fetchArticleItem(Number(id))).unwrap(),
+        dispatch(fetchRelatedArticles(Number(id))).unwrap(),
+      ]).then(() => {
         setLoading(false);
       });
     }
@@ -77,6 +80,7 @@ export const ArticlePage: FC = () => {
   return (
     <section className="article-page">
       <Hero title={articleItem.title} image={articleItem.image} className="article-page__hero" />
+      <video controls src="mega-file" autoPlay loop width={400} height={240}></video>
       <div className="container article-page__main">
         <div className="article-page__info">
           <span className="article-page__category">{categoryTitles[articleItem.category.name]}</span>

@@ -12,6 +12,7 @@ module.exports = {
   entry: {
     main: './src/index.tsx',
     initColorScheme: './src/features/colorScheme/initColorScheme.ts',
+    sw: './src/features/serviceWorker/service.worker.ts',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -30,13 +31,21 @@ module.exports = {
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
+        test: /service\.worker\.ts$/i,
+        use: 'ts-loader',
+        type: 'asset/resource',
+        generator: {
+          filename: 'sw.js',
+        },
+      },
+      {
         test: /\.(svg|jpg)$/,
         type: 'asset/resource',
       },
       {
         test: /\.(ts|tsx)$/,
         use: 'ts-loader',
-        exclude: /node-modules/,
+        exclude: [/node_modules/, /worker\.ts$/],
       },
     ],
   },
@@ -55,6 +64,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/app/index.html',
+      excludeChunks: ['sw'],
     }),
     new HtmlInlineScriptWebpackPlugin({ scriptMatchPattern: [/initColorScheme\..+\.js$/] }),
     new StylelintWebpackPlugin({

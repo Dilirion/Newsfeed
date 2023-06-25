@@ -8,6 +8,7 @@ import { Dispatch } from '@app/store';
 import { fetchCategories } from '@features/categories/actions';
 import { fetchSources } from '@features/sources/actions';
 import { Header } from '@components/Header/Header';
+import { OfflineNotificationWatcher } from '@features/networkStatus/OfflineNotificationWatcher/OfflineNotificationWatcher';
 
 interface Props {
   children?: React.ReactNode;
@@ -52,6 +53,7 @@ export const Page: FC<Props> = ({ children }) => {
           </div>
         </div>
       </footer>
+      <OfflineNotificationWatcher />
     </Fragment>
   );
 };
