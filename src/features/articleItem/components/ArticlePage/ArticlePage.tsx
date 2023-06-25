@@ -80,7 +80,6 @@ export const ArticlePage: FC = () => {
   return (
     <section className="article-page">
       <Hero title={articleItem.title} image={articleItem.image} className="article-page__hero" />
-      <video controls src="mega-file" autoPlay loop width={400} height={240}></video>
       <div className="container article-page__main">
         <div className="article-page__info">
           <span className="article-page__category">{categoryTitles[articleItem.category.name]}</span>

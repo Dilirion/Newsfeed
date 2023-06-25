@@ -11,10 +11,9 @@ import { NetworkStatusContextProvider } from '@features/networkStatus/networkSta
 const firebaseApp = initializeAPI();
 
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker
-    .register('/sw.js')
-    .then(() => console.log('sw register success'))
-    .catch(() => console.error('sw register error'));
+  navigator.serviceWorker.register('/sw.js');
+  // .then(() => console.log('sw register success'))
+  // .catch(() => console.error('sw register error'));
 }
 
 ReactDOM.render(

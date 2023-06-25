@@ -39,7 +39,12 @@ module.exports = {
         },
       },
       {
-        test: /\.(svg|jpg)$/,
+        test: /.webmanifest$/i,
+        use: 'webpack-webmanifest-loader',
+        type: 'asset/resource',
+      },
+      {
+        test: /\.(svg|jpg|png)$/,
         type: 'asset/resource',
       },
       {
@@ -63,6 +68,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
+      favicon: './src/images/favicon.ico',
       template: './src/app/index.html',
       excludeChunks: ['sw'],
     }),
