@@ -30,5 +30,21 @@
       "type": "image/png",
       "purpose": "any"
     }
+  ],
+  "shortcuts": [
+    {
+      "name": "Категория \"Мода\"",
+      "short_name": "Мода",
+      "description": "Переход на категорию \"Мода\"",
+      "url": "/fashion",
+      "icons": [{ "src": "../images/fashion_icon_192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "Категория \"Karpov.courses\"",
+      "short_name": "Karpov.courses",
+      "description": "Переход на категорию \"Karpov.courses\"",
+      "url": "/karpov.courses",
+      "icons": [{ "src": "../images/icon_192.png", "sizes": "192x192", "type": "image/png" }]
+    }
   ]
 }
