@@ -1,14 +1,12 @@
 import React, { FC, Fragment, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import './Page.css';
-import { Navigation } from '@components/Navigation/Navigation';
-import { Logo } from '@components/Logo/Logo';
 import { EmailModal } from '@features/subscribeNotification/components/EmailModal/EmailModal';
 import { Dispatch } from '@app/store';
 import { fetchCategories } from '@features/categories/actions';
 import { fetchSources } from '@features/sources/actions';
 import { Header } from '@components/Header/Header';
 import { OfflineNotificationWatcher } from '@features/networkStatus/OfflineNotificationWatcher/OfflineNotificationWatcher';
+import { Footer } from '@components/Footer/Footer';
 
 interface Props {
   children?: React.ReactNode;
@@ -39,20 +37,7 @@ export const Page: FC<Props> = ({ children }) => {
 
       <main>{children}</main>
 
-      <footer className="footer">
-        <div className="container">
-          <div className="footer__top">
-            <Logo />
-            <Navigation className="footer__navigation" />
-          </div>
-          <div className="footer__bottom">
-            Сделано на Frontend курсе в{' '}
-            <a className="footer__link" href="https://karpov.courses/frontend" target="_blank" rel="noreferrer">
-              Karpov.Courses
-            </a>
-          </div>
-        </div>
-      </footer>
+      <Footer />
       <OfflineNotificationWatcher />
     </Fragment>
   );

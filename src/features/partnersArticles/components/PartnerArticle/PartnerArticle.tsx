@@ -18,7 +18,7 @@ export const PartnerArticle = () => {
   }
 
   return (
-    <section className="partner-article">
+    <article className="partner-article">
       <div className="partner-article__container container grid">
         <div className="partner-article__image-container">
           <img src={article.image} alt={article.title} className="partner-article__image" />
@@ -29,6 +29,6 @@ export const PartnerArticle = () => {
           <p className="partner-article__text">{article.description}</p>
         </div>
       </div>
-    </section>
+    </article>
   );
 };

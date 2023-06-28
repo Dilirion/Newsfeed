@@ -25,7 +25,7 @@ export const Hero: React.FC<HeroProps> = ({ image = '', title, text = '', classN
       )}
     >
       <div className="hero__in">
-        <Image src={image} className="hero__image" />
+        <Image src={image} className="hero__image" alt={title} />
         <div className="hero__container container">
           <div className="hero__content">
             <Title className="hero__title">{title}</Title>

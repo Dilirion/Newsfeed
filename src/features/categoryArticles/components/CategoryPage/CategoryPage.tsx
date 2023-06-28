@@ -37,37 +37,39 @@ export const CategoryPage: FC = () => {
 
   if (loading) {
     return (
-      <section className="category-page">
-        <HeroSkeleton title={categoryTitles[category]} className="category-page__hero" />
-        <div className="container grid">
-          {isDesktop && (
+      <div className="category-page" aria-label="Загрузка">
+        <div aria-hidden>
+          <HeroSkeleton title={categoryTitles[category]} className="category-page__hero" />
+          <div className="container grid">
+            {isDesktop && (
+              <section className="category-page__sidebar">
+                {repeat((i) => {
+                  return <SidebarArticleCardSkeleton key={i} className="category-page__sidebar-item" />;
+                }, 3)}
+              </section>
+            )}
             <section className="category-page__sidebar">
               {repeat((i) => {
                 return <SidebarArticleCardSkeleton key={i} className="category-page__sidebar-item" />;
               }, 3)}
             </section>
-          )}
-          <section className="category-page__sidebar">
-            {repeat((i) => {
-              return <SidebarArticleCardSkeleton key={i} className="category-page__sidebar-item" />;
-            }, 3)}
-          </section>
+          </div>
         </div>
-      </section>
+      </div>
     );
   }
 
   const mainArticles = isMobile ? articles : articles.slice(3);
 
   return (
-    <section className="category-page">
+    <div className="category-page">
       <Hero
         title={categoryTitles[category]}
         image={require(`@images/categories/${category}.jpg`)}
         className="category-page__hero"
       />
-      <div className="container grid">
-        <section className="category-page__content">
+      <section className="container grid">
+        <div className="category-page__content">
           {mainArticles.map((item) => {
             const category = categories.find(({ id }) => item.category_id === id);
             const source = sources.find(({ id }) => item.source_id === id);
@@ -85,9 +87,9 @@ export const CategoryPage: FC = () => {
               />
             );
           })}
-        </section>
+        </div>
         {isDesktop && (
-          <section className="category-page__sidebar">
+          <aside className="category-page__sidebar">
             {articles.slice(0, 3).map((item) => {
               const source = sources.find(({ id }) => item.source_id === id);
 
@@ -103,9 +105,9 @@ export const CategoryPage: FC = () => {
                 />
               );
             })}
-          </section>
+          </aside>
         )}
-      </div>
-    </section>
+      </section>
+    </div>
   );
 };

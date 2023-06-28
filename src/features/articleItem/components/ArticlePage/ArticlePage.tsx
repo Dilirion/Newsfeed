@@ -43,33 +43,35 @@ export const ArticlePage: FC = () => {
 
   if (loading) {
     return (
-      <section className="article-page">
-        {articleItem?.title && articleItem.image ? (
-          <Hero title={articleItem.title} image={articleItem.image} className="article-page__hero" />
-        ) : (
-          <HeroSkeleton hasText={true} className="article-page__hero" />
-        )}
-        <div className="container article-page__main">
-          <div className="article-page__info">
-            <SkeletonText />
-          </div>
-          <div className="grid">
-            <div className="article-page__content">
-              <p>
-                <SkeletonText rowsCount={6} />
-              </p>
+      <div className="article-page" aria-label="Загрузка">
+        <div aria-hidden>
+          {articleItem?.title && articleItem.image ? (
+            <Hero title={articleItem.title} image={articleItem.image} className="article-page__hero" />
+          ) : (
+            <HeroSkeleton hasText={true} className="article-page__hero" />
+          )}
+          <div className="container article-page__main">
+            <div className="article-page__info">
+              <SkeletonText />
             </div>
-
-            {isDesktop && (
-              <div className="article-page__sidebar">
-                {repeat((i) => {
-                  return <SidebarArticleCardSkeleton key={i} className="article-page__sidebar-item" />;
-                }, 3)}
+            <div className="grid">
+              <div className="article-page__content">
+                <p>
+                  <SkeletonText rowsCount={6} />
+                </p>
               </div>
-            )}
+
+              {isDesktop && (
+                <aside className="article-page__sidebar">
+                  {repeat((i) => {
+                    return <SidebarArticleCardSkeleton key={i} className="article-page__sidebar-item" />;
+                  }, 3)}
+                </aside>
+              )}
+            </div>
           </div>
         </div>
-      </section>
+      </div>
     );
   }
 
@@ -78,10 +80,10 @@ export const ArticlePage: FC = () => {
   }
 
   return (
-    <section className="article-page">
+    <div className="article-page">
       <Hero title={articleItem.title} image={articleItem.image} className="article-page__hero" />
       <div className="container article-page__main">
-        <div className="article-page__info">
+        <section className="article-page__info" aria-label="Информация о статье">
           <span className="article-page__category">{categoryTitles[articleItem.category.name]}</span>
           <span className="article-page__date">{beautifyDate(articleItem.date)}</span>
           {articleItem.link.length > 0 && (
@@ -89,14 +91,14 @@ export const ArticlePage: FC = () => {
               {articleItem.source?.name}
             </Source>
           )}
-        </div>
-        <div className="grid">
+        </section>
+        <section className="grid" aria-label="Статья">
           <div className="article-page__content">
             <p>{articleItem.text}</p>
           </div>
 
           {isDesktop && (
-            <div className="article-page__sidebar">
+            <aside className="article-page__sidebar" aria-label="Второстепенный список статей">
               {relatedArticles.slice(3, 9).map((item) => {
                 const source = sources.find(({ id }) => item.source_id === id);
 
@@ -112,9 +114,9 @@ export const ArticlePage: FC = () => {
                   />
                 );
               })}
-            </div>
+            </aside>
           )}
-        </div>
+        </section>
       </div>
 
       <section className="article-page__related-articles">
@@ -141,6 +143,6 @@ export const ArticlePage: FC = () => {
           </div>
         </div>
       </section>
-    </section>
+    </div>
   );
 };
