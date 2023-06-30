@@ -8,6 +8,8 @@ import { App } from '@app/components/App/App';
 import { AuthContextProvider } from '@features/auth/AuthContextProvider';
 import { store } from '@app/store';
 import { NetworkStatusContextProvider } from '@features/networkStatus/networkStatusContextProvider';
+import { initI18n } from '@features/locale/utils';
+
 const firebaseApp = initializeAPI();
 
 if ('serviceWorker' in navigator) {
@@ -16,15 +18,17 @@ if ('serviceWorker' in navigator) {
   // .catch(() => console.error('sw register error'));
 }
 
-ReactDOM.render(
-  <Provider store={store}>
-    <NetworkStatusContextProvider>
-      <AuthContextProvider firebaseApp={firebaseApp}>
-        <Router>
-          <App />
-        </Router>
-      </AuthContextProvider>
-    </NetworkStatusContextProvider>
-  </Provider>,
-  document.getElementById('root')
-);
+initI18n(() => {
+  ReactDOM.render(
+    <Provider store={store}>
+      <NetworkStatusContextProvider>
+        <AuthContextProvider firebaseApp={firebaseApp}>
+          <Router>
+            <App />
+          </Router>
+        </AuthContextProvider>
+      </NetworkStatusContextProvider>
+    </Provider>,
+    document.getElementById('root')
+  );
+});

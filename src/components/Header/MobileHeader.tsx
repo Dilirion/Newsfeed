@@ -7,16 +7,25 @@ import { Burger } from '@components/Icons/Burger';
 import { Cross } from '@components/Icons/Cross';
 import { ColorSchemeSwitcherMobile } from '@features/colorScheme/components/ColorSchemeSwitcherMobile/ColorSchemeSwitcherMobile';
 import { createFocusTrap } from 'focus-trap';
+import { LocaleSwitcherMobile } from '@features/locale/components/LocaleSwitcherMobile/LocaleSwitcherMobile';
+import { useTranslation } from 'react-i18next';
 
 export const MobileHeader: FC = () => {
+  const { t } = useTranslation();
   const ref = useRef<HTMLElement | null>(null);
 
   const [isOpenMenu, toggleMenu] = useState(false);
   const [isOpenSubMenu, toggleSubMenu] = useState(false);
+  const [selectedSubMenu, selectSubMenu] = useState<'locale' | 'scheme' | null>(null);
   const documentKeydownListener = (event: KeyboardEvent) => {
     if (event.key === 'Escape') {
       toggleMenu(false);
     }
+  };
+
+  const closeSubMenu = () => {
+    toggleSubMenu(false);
+    selectSubMenu(null);
   };
 
   useEffect(() => {
@@ -49,7 +58,7 @@ export const MobileHeader: FC = () => {
       <div className="container header__mobile-container">
         <Logo />
         <button
-          aria-label={isOpenMenu ? 'Скрыть меню' : 'Открыть меню'}
+          aria-label={isOpenMenu ? t('header_mobile_menu_button_close') : t('header_mobile_menu_button_open')}
           className="header__mobile-button"
           onClick={() => toggleMenu(!isOpenMenu)}
         >
@@ -61,17 +70,37 @@ export const MobileHeader: FC = () => {
           <div className="header__mobile-backdrop" />
           <div className="header__mobile-menu">
             {isOpenSubMenu ? (
-              <button className="header__mobile-back-button" onClick={() => toggleSubMenu(false)}>
-                К меню
+              <button className="header__mobile-back-button" onClick={closeSubMenu}>
+                {t('header_mobile_submenu_back')}
               </button>
             ) : (
-              <Navigation className="header__mobile-navigation" />
+              <Navigation className="navigation--mobile" />
             )}
 
             <div
               className={classNames('header__mobile-controls', { 'header__mobile-controls--hasMenu': isOpenSubMenu })}
             >
-              <ColorSchemeSwitcherMobile isMenuActive={isOpenSubMenu} onClickSchemeButton={() => toggleSubMenu(true)} />
+              {(!isOpenSubMenu || (isOpenSubMenu && selectedSubMenu === 'locale')) && (
+                <LocaleSwitcherMobile
+                  isMenuActive={isOpenSubMenu}
+                  onClickLocaleButton={() => {
+                    selectSubMenu('locale');
+                    toggleSubMenu(true);
+                  }}
+                  onChangeLocale={closeSubMenu}
+                />
+              )}
+
+              {(!isOpenSubMenu || (isOpenSubMenu && selectedSubMenu === 'scheme')) && (
+                <ColorSchemeSwitcherMobile
+                  isMenuActive={isOpenSubMenu}
+                  onClickSchemeButton={() => {
+                    selectSubMenu('scheme');
+                    toggleSubMenu(true);
+                  }}
+                  onChangeScheme={closeSubMenu}
+                />
+              )}
             </div>
           </div>
         </div>

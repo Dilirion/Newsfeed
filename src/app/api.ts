@@ -152,16 +152,16 @@ export const getMainPartnerArticle = async (): Promise<IPartnerArticle | null> =
 
   return article;
 };
-export const apiFetchNews = (): Promise<NewsAPI> => {
-  return fetch('https://frontend.karpovcourses.net/api/v2/ru/news').then((response) => response.json());
+export const apiFetchNews = (lang: string): Promise<NewsAPI> => {
+  return fetch(`https://frontend.karpovcourses.net/api/v2/${lang}/news`).then((response) => response.json());
 };
 
-export const apiFetchTrends = (): Promise<NewsAPI> => {
-  return fetch('https://frontend.karpovcourses.net/api/v2/ru/trends').then((response) => response.json());
+export const apiFetchTrends = (lang: string): Promise<NewsAPI> => {
+  return fetch(`https://frontend.karpovcourses.net/api/v2/${lang}/trends`).then((response) => response.json());
 };
 
-export const apiFetchCategory = (id: number): Promise<NewsAPI> => {
-  return fetch(`https://frontend.karpovcourses.net/api/v2/ru/news/${id}`).then((response) => response.json());
+export const apiFetchCategory = (lang: string, id: number): Promise<NewsAPI> => {
+  return fetch(`https://frontend.karpovcourses.net/api/v2/${lang}/news/${id}`).then((response) => response.json());
 };
 
 export const apiFetchCategories = (): Promise<Category[]> => {

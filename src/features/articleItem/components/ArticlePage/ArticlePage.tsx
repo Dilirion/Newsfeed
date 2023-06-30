@@ -1,9 +1,9 @@
 import React, { FC, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import './ArticlePage.css';
 import { beautifyDate, repeat } from '@app/utils';
-import { categoryTitles } from '@features/categories/constants';
 import { SidebarArticleCard } from '@components/SidebarArticleCard/SidebarArticleCard';
 import { Hero } from '@components/Hero/Hero';
 import { ArticleCard } from '@components/ArticleCard/ArticleCard';
@@ -28,6 +28,7 @@ export const ArticlePage: FC = () => {
   const sources = useSelector(getSources);
   const [loading, setLoading] = useState(!articleItem?.text);
   const { isDesktop } = useAdaptive();
+  const { t, i18n } = useTranslation();
 
   React.useLayoutEffect(() => {
     if (!articleItem?.text) {
@@ -43,7 +44,7 @@ export const ArticlePage: FC = () => {
 
   if (loading) {
     return (
-      <div className="article-page" aria-label="Загрузка">
+      <div className="article-page" aria-label={t('loading')}>
         <div aria-hidden>
           {articleItem?.title && articleItem.image ? (
             <Hero title={articleItem.title} image={articleItem.image} className="article-page__hero" />
@@ -83,22 +84,22 @@ export const ArticlePage: FC = () => {
     <div className="article-page">
       <Hero title={articleItem.title} image={articleItem.image} className="article-page__hero" />
       <div className="container article-page__main">
-        <section className="article-page__info" aria-label="Информация о статье">
-          <span className="article-page__category">{categoryTitles[articleItem.category.name]}</span>
-          <span className="article-page__date">{beautifyDate(articleItem.date)}</span>
+        <section className="article-page__info" aria-label={t('article_page_title')}>
+          <span className="article-page__category">{t(`category${articleItem.category.name}`)}</span>
+          <span className="article-page__date">{beautifyDate(articleItem.date, i18n.language)}</span>
           {articleItem.link.length > 0 && (
             <Source className="article-page__source" href={articleItem.link}>
               {articleItem.source?.name}
             </Source>
           )}
         </section>
-        <section className="grid" aria-label="Статья">
+        <section className="grid" aria-label={t('article_page_content_title')}>
           <div className="article-page__content">
             <p>{articleItem.text}</p>
           </div>
 
           {isDesktop && (
-            <aside className="article-page__sidebar" aria-label="Второстепенный список статей">
+            <aside className="article-page__sidebar" aria-label={t('article_page_sub_article_title')}>
               {relatedArticles.slice(3, 9).map((item) => {
                 const source = sources.find(({ id }) => item.source_id === id);
 

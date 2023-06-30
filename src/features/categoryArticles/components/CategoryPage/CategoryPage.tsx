@@ -1,9 +1,10 @@
 import React, { FC, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import './CategoryPage.css';
 import { CategoryNames } from '@features/categories/types';
-import { categoryIds, categoryTitles } from '@features/categories/constants';
+import { categoryIds } from '@features/categories/constants';
 import { SidebarArticleCard } from '@components/SidebarArticleCard/SidebarArticleCard';
 import { Hero } from '@components/Hero/Hero';
 import { ArticleCard } from '@components/ArticleCard/ArticleCard';
@@ -25,21 +26,22 @@ export const CategoryPage: FC = () => {
   const sources = useSelector(getSources);
   const [loading, setLoading] = useState(true);
   const { isMobile, isDesktop } = useAdaptive();
+  const { t, i18n } = useTranslation();
 
   React.useEffect(() => {
     setLoading(true);
-    dispatch(fetchCategoryArticles(categoryIds[category]))
+    dispatch(fetchCategoryArticles({ lang: i18n.language, id: categoryIds[category] }))
       .unwrap()
       .then(() => {
         setLoading(false);
       });
-  }, [category]);
+  }, [category, i18n.language]);
 
   if (loading) {
     return (
-      <div className="category-page" aria-label="Загрузка">
+      <div className="category-page" aria-label={t('loading')}>
         <div aria-hidden>
-          <HeroSkeleton title={categoryTitles[category]} className="category-page__hero" />
+          <HeroSkeleton title={t(`category_${category}`)} className="category-page__hero" />
           <div className="container grid">
             {isDesktop && (
               <section className="category-page__sidebar">
@@ -64,7 +66,7 @@ export const CategoryPage: FC = () => {
   return (
     <div className="category-page">
       <Hero
-        title={categoryTitles[category]}
+        title={t(`category_${category}`)}
         image={require(`@images/categories/${category}.jpg`)}
         className="category-page__hero"
       />
