@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { apiFetchArticleItem } from '@app/api';
 import { setArticleItem } from '@features/articleItem/slice';
+import { apiFetchArticleItem } from '@app/publicApi';
 
 export const fetchArticleItem = createAsyncThunk('api/fetchArticleItem', (articleId: number, thunk) => {
   return apiFetchArticleItem(articleId).then((article) => {

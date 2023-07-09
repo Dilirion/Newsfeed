@@ -42,7 +42,7 @@ _self.addEventListener('fetch', (event) => {
         const isImage = !isHtmlPage && request.headers.get('Accept')?.indexOf('image/') !== -1;
         const requestKey = isHtmlPage ? '/' : request;
         try {
-          if (!isImage) {
+          if (isImage) {
             const cacheItem = await caches.match(requestKey);
             if (cacheItem) {
               return cacheItem;

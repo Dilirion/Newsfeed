@@ -25,7 +25,7 @@ export const PrivateRoute: FC<Tprops> = ({ children, ...rest }) => {
           ) : (
             <Redirect
               to={{
-                pathname: '/login',
+                pathname: '/admin/login',
                 state: { from: props.location },
               }}
             />

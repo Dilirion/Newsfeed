@@ -14,6 +14,6 @@ export const NetworkStatusContextProvider: FC = ({ children }) => {
   useEffect(() => {
     window.addEventListener('online', () => setOnline(true));
     window.addEventListener('offline', () => setOnline(false));
-  });
+  }, []);
   return <context.Provider value={{ online: online }}>{children}</context.Provider>;
 };

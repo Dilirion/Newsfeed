@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { apiFetchNews, apiFetchTrends } from '@app/api';
 import { setNews, setTrends } from '@features/articlesList/slice';
+import { apiFetchNews, apiFetchTrends } from '@app/publicApi';
 
 export const fetchNews = createAsyncThunk('api/fetchNews', (lang: string, thunk) => {
   return apiFetchNews(lang).then((news) => {

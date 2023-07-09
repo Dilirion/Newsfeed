@@ -32,7 +32,7 @@ export const EmailModal: FC<EmailModalProps> = ({ onClose, shown }: EmailModalPr
           className="email-modal__title"
           id={MODAL_LABEL_ID}
           dangerouslySetInnerHTML={{
-            __html: t('email_modal_button_title', {
+            __html: t('email_modal_title', {
               link: `<a href="features/subscribeNotification/components/EmailModal/EmailModal#" class="email-modal__link">
             Karpov.Courses?
           </a>`,
@@ -40,7 +40,7 @@ export const EmailModal: FC<EmailModalProps> = ({ onClose, shown }: EmailModalPr
           }}
         />
         <p className="email-modal__text" id={MODAL_DESCRIPTION_ID}>
-          {t('email_modal_button_text')}
+          {t('email_modal_text')}
         </p>
         <form
           className="email-modal__form"

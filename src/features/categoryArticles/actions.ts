@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { apiFetchCategory } from '@app/api';
 import { setCategoryArticles } from '@features/categoryArticles/slice';
+import { apiFetchCategory } from '@app/publicApi';
 
 export const fetchCategoryArticles = createAsyncThunk(
   'api/fetchCategoryArticles',
