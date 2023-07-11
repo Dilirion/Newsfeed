@@ -8,11 +8,11 @@ import { store } from '@app/store';
 import { NetworkStatusContextProvider } from '@features/networkStatus/networkStatusContextProvider';
 import { initI18n } from '@features/locale/utils';
 
-/*if ('serviceWorker' in navigator) {
+if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/sw.js');
   // .then(() => console.log('sw register success'))
   // .catch(() => console.error('sw register error'));
-}*/
+}
 
 initI18n(() => {
   ReactDOM.render(
