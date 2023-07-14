@@ -89,9 +89,14 @@ module.exports = {
     }),
   ],
   devServer: {
+    client: {
+      overlay: false,
+    },
+    hot: false,
     open: true,
     historyApiFallback: {
       disableDotRule: true,
     },
   },
+  devtool: mode === 'production' ? false : 'eval-cheap-module-source-map',
 };

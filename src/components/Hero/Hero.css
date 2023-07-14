@@ -10,7 +10,11 @@
 
 .hero__image {
   width: 100%;
-  height: 179px;
+
+  --image-container-height: 179px;
+
+  height: min(var(--image-container-height), 40vh);
+  max-height: 40vh;
 }
 
 .hero__container {
