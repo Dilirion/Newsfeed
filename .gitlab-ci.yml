@@ -15,6 +15,17 @@ code_quality:
   only:
     - merge_requests
 
+test:
+  image: node:16.16.0
+  stage: test
+  allow_failure: true
+  before_script:
+    - npm ci
+  script:
+    - npm run test
+  only:
+    - merge_requests
+
 build:
   image: node:16.16.0
   stage: build
