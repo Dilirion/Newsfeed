@@ -10,5 +10,13 @@
   },
   "rules": {
     "no-console": "warn"
-  }
+  },
+  "overrides": [
+    {
+      "files": ["jest-setup.ts"],
+      "env": {
+        "jest": true
+      }
+    }
+  ]
 }

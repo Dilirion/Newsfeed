@@ -7,10 +7,10 @@ const concatWords = (words: string[]): string => {
     }
   });
 
-  // @ts-ignore
-  const formatter = new Intl.ListFormat('ru', { style: 'long', type: 'conjunction' });
+  //const formatter = new Intl.ListFormat('ru', { style: 'long', type: 'conjunction' });
 
-  return formatter.format(result);
+  //return formatter.format(result);
+  return '';
 };
 
 describe('concatWords', () => {

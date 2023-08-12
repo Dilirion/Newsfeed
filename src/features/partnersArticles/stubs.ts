@@ -12,3 +12,62 @@ export const partnerArticleAPIStub: Omit<IPartnerArticle, 'id'> = {
     nanoseconds: 123123,
   },
 };
+
+export const partnerArticlesFirebaseAPIStub = {
+  documents: [
+    {
+      name: 'projects/karpov-news/databases/(default)/documents/partners-posts/E1TdXXx0E1mRzpRZ4r5l',
+      fields: {
+        created: {
+          timestampValue: '2021-11-18T06:45:00Z',
+        },
+        text: {
+          stringValue:
+            'Когда я добавлял шрифты на сайты, сначала проверял, если ли шрифт на Google Fonts. Если был, я спокойно подключал по инструкции и работал дальше. Я не думал о том, что сервис гугла вдруг перестанет работать, ведь это гугл, такого не может быть.\n\nКогда Роскомнадзор блокировал телеграм, под раздачу попали шрифты от гугла. Если разработчик подключал шрифты только через гугл, сайт остался без них:\n\n\nВо время блокировки я прозрел — нужно страховаться от падения даже надежных сервисов. Кажется, что это очевидная мысль, но ребята, кто мог подумать, что гугл упадет из-за блокировки телеграма?\n\nКажется, что это единичный случай, но нет. В Украине заблокировали доступ к сервисам Яндекса. Что произошло с сайтами, где разработчик подключил Яндекс.Карты:\n\n\nТеперь я везде включаю скептика:\n\nОтвалятся шрифты от гугла — добавлю локально\nОтвалятся Яндекс.Карты — добавлю картинку с местоположением\nНе загрузится фоновая фотография — добавлю подложку с похожим цветом, чтобы белые буквы читались.',
+        },
+        title: {
+          stringValue: 'Страховка надежных',
+        },
+        description: {
+          stringValue: 'Когда я добавлял шрифты на сайты, сначала проверял, если ли шрифт на Google Fonts.',
+        },
+        image: {
+          stringValue:
+            'https://firebasestorage.googleapis.com/v0/b/karpov-news.appspot.com/o/4d671cfe78cbb63a617875e1f6023157-min.jpeg-1644672894341?alt=media&token=0000418c-aa38-4cd4-9bb0-cb0feccc4264',
+        },
+        'company-name': {
+          stringValue: 'Рога и копыта',
+        },
+      },
+      createTime: '2021-11-18T10:00:00.324172Z',
+      updateTime: '2022-02-12T13:34:57.494163Z',
+    },
+    {
+      name: 'projects/karpov-news/databases/(default)/documents/partners-posts/wLo0OOVG1NpKJfxmjuxy',
+      fields: {
+        text: {
+          stringValue:
+            'Студенты Академии спрашивают: «А что круче — Sass или Less?».  Берите любой. В работе вам понадобятся вложенности, переменные и миксины — эти функции есть во всех препроцессорах.  Все равно',
+        },
+        created: {
+          timestampValue: '2021-11-17T09:20:00Z',
+        },
+        'company-name': {
+          stringValue: 'bezugly.ru',
+        },
+        title: {
+          stringValue: 'Sass или Less?ggg',
+        },
+        description: {
+          stringValue: 'Студенты Академии спрашивают: «А что круче — Sass или Less?»',
+        },
+        image: {
+          stringValue:
+            'https://firebasestorage.googleapis.com/v0/b/bezuglyru.appspot.com/o/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202021-03-21%20%D0%B2%2002.09.55.png?alt=media&token=59125b53-011f-4303-979d-3a8c40c862ba',
+        },
+      },
+      createTime: '2021-11-18T08:42:15.823872Z',
+      updateTime: '2021-11-26T10:13:39.666843Z',
+    },
+  ],
+};

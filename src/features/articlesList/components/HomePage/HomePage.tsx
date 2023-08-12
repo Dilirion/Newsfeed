@@ -47,7 +47,7 @@ export const HomePage: FC = () => {
 
   if (loading) {
     return (
-      <div className="home-page" aria-label="Загрузка">
+      <div className="home-page" aria-label={t('loading')} data-testid="skeleton">
         <div aria-hidden>
           <div className="home-page__hero-link">
             <HeroSkeleton hasText={true} className="home-page__hero" />
@@ -98,7 +98,7 @@ export const HomePage: FC = () => {
   const mainArticles = isMobile ? articles.slice(1) : articles.slice(4);
 
   return (
-    <div className="home-page">
+    <div className="home-page" data-testid="home-page">
       {firstArticle && (
         <Link className="home-page__hero-link" to={`/article/${firstArticle.id}`}>
           <Hero

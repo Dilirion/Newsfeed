@@ -20,7 +20,7 @@ export const PartnerArticle = () => {
   }
 
   return (
-    <article className="partner-article">
+    <article className="partner-article" data-testid="article">
       <div className="partner-article__container container grid">
         <div className="partner-article__image-container">
           <img src={article.image.stringValue} alt={article.title.stringValue} className="partner-article__image" />
