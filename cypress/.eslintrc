@@ -1,0 +1,7 @@
+{
+  "extends": ["plugin:cypress/recommended"],
+  "parser": "@typescript-eslint/parser",
+  "rules": {
+    "cypress/no-unnecessary-waiting": "off"
+  }
+}

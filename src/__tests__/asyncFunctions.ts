@@ -15,19 +15,19 @@ const promiseFunction = () => {
 const manyTimeouts = () => {
   return new Promise((resolve) => {
     setTimeout(() => {
-      console.log('1');
+      //console.log('1');
     }, 1000);
 
     setTimeout(() => {
-      console.log('2');
+      //console.log('2');
     }, 2000);
 
     setTimeout(() => {
-      console.log('3');
+      //console.log('3');
     }, 3000);
 
     setTimeout(() => {
-      console.log('4');
+      //console.log('4');
       resolve('ok');
     }, 4000);
   });
@@ -87,7 +87,7 @@ describe.only('server data', () => {
       })
     ) as jest.Mock;
 
-    const data = await getData();
+    /*const data = */ await getData();
 
     expect(2).toBe(2);
   });
